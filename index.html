@@ -1,0 +1,78 @@
+<!--Programmer: Sai Chand Akkisani
+     Student ID: C0882366
+     Front End Web Development 2 Assignment 7
+     Date: 21 July 2023 -->
+
+<html>
+	<font size="8" color="green">Final test lab</font><br><br>
+	Number of rows: <input type="text" id="t1" /><br><br>
+	Number of cols: <input type="text" id="t2" /><br><br>
+	
+	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+	
+	<button id="b2" onclick="addColumn()">Add Column</button>
+	
+	<button id="b3" onclick="addRow()">Add Row</button>
+		
+	<script language="javascript">
+		
+		//Function to generate table
+		function generateTable() {
+		let numRows = document.getElementById('t1').value;
+		let numColumns = document.getElementById('t2').value;
+
+		let table = document.createElement('table');
+		let tbody = document.createElement('tbody');
+
+        for (let i = 0; i < numRows; i++) {
+			let tr = document.createElement("tr");
+			for (let j = 0; j < numColumns; j++) {
+				let td = document.createElement("td");
+				let tdText = document.createTextNode(`Row ${i} Column ${j}`);
+				td.appendChild(tdText);
+                tr.appendChild(td);
+			}
+			tbody.appendChild(tr);
+		}
+
+		table.appendChild(tbody);
+
+		document.body.appendChild(table);
+		table.setAttribute("border", "2");
+		table.setAttribute("id", "table1");
+	}
+     //Function to add rows
+	function addRow() {
+		let table = document.getElementById('table1');
+		let tbody = table.firstChild;
+        let numColumns = tbody.childNodes[0].childNodes.length;
+        let numRows = tbody.childNodes.length;
+		let tr = document.createElement("tr");
+		for (let j = 0; j < numColumns; j++) {
+            let td = document.createElement("td");
+            let tdText = document.createTextNode(`Row ${numRows} Column ${j}`);
+            td.appendChild(tdText);
+            tr.appendChild(td);
+		}
+		tbody.appendChild(tr);
+
+	}
+     //Function to add columns
+	function addColumn() {
+		let table = document.getElementById('table1');
+		let tbody = table.firstChild;
+		let rows = tbody.childNodes;
+        let numColumns = tbody.childNodes[0].childNodes.length;
+        let numRows = tbody.childNodes.length;
+		for (let j = 0; j < numRows; j++) {
+            let td = document.createElement("td");
+            let tdText = document.createTextNode(`Row ${j} Column ${numColumns}`);
+            td.appendChild(tdText);
+            rows[j].appendChild(td);
+		}
+		tbody.appendChild(rows);
+	}
+	
+	</script>
+	
+</html>
